@@ -30,11 +30,20 @@ export default function Experience() {
                 </div>
               </div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Client Projects:</h3>
-              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Abbott - Healthcare solutions</li>
-                <li>Walmart - E-commerce and retail systems</li>
-                <li>Tomra - Recycling and sorting technology</li>
-              </ul>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div className="flex items-center bg-gray-100 dark:bg-gray-900 p-2 rounded-lg shadow-sm">
+                  <img src="/images/abbott.png" alt="Abbott" className="h-10 w-auto mr-2" />
+                  {/* <span className="text-gray-700 dark:text-gray-300">Abbott - Healthcare solutions</span> */}
+                </div>
+                <div className="flex items-center bg-gray-100 dark:bg-gray-900 p-2 rounded-lg shadow-sm">
+                  <img src="/images/walmart.png" alt="Walmart" className="h-10 w-auto mr-2" />
+                  {/* <span className="text-gray-700 dark:text-gray-300">Walmart - E-commerce and retail systems</span> */}
+                </div>
+                <div className="flex items-center bg-gray-100 dark:bg-gray-900 p-2 rounded-lg shadow-sm">
+                  <img src="/images/tomra.png" alt="Tomra" className="h-10 w-auto mr-2" />
+                  {/* <span className="text-gray-700 dark:text-gray-300">Tomra - Recycling and sorting technology</span> */}
+                </div>
+              </div>
             </div>
           </div>
         </div>

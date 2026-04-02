@@ -1,6 +1,20 @@
+"use client";
+
 import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Navigation = () => {
+  const router = useRouter();
+  const [query, setQuery] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) {
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
   return (
     <nav className="bg-transparent shadow-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,7 +44,22 @@ const Navigation = () => {
                 </Link>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center space-x-4">
+              <form onSubmit={handleSearch} className="flex items-center">
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search..."
+                  className="px-3 py-1 text-sm rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                <button
+                  type="submit"
+                  className="px-3 py-1 text-sm bg-indigo-600 text-white rounded-r-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  Search
+                </button>
+              </form>
               <Link href="/admin" className="px-3 py-1.5 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition">
                 Login
               </Link>

@@ -27,7 +27,7 @@ const Login = () => {
         window.localStorage.setItem('authToken', token);
       }
 
-      router.push('/');
+      router.push('/admin/dashboard');
     } catch (err: any) {
       setError(err?.response?.data?.message || err?.message || 'Login failed');
     } finally {
