@@ -16,16 +16,17 @@ jobs:
         with:
           node-version: 24
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm install
 
-      - run: npm run build
-
-      - run: |
+      - name: Create deployment package
+        run: |
           zip -r deploy.zip . \
-             -x "*.git*" \
-             -x ".github/*" \
-             -x "node_modules/*" \
-             -x ".next/*"
+            -x "*.git*" \
+            -x ".github/*" \
+            -x "node_modules/*" \
+            -x ".next/*"
+
       - uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
