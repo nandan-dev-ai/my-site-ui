@@ -5,7 +5,7 @@ const featureCards = [
     href: '/about',
   },
   {
-    title: 'Experience',
+    title: 'Alumini',
     description: 'Discover the projects and roles that define my professional journey.',
     href: '/experience',
   },
