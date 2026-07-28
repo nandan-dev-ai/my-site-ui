@@ -10,14 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
-      - name: Install dependencies
-        run: npm install
+      - name: Checkout source
+        uses: actions/checkout@v4
 
       - name: Create deployment package
         run: |
@@ -27,12 +21,13 @@ jobs:
             -x "node_modules/*" \
             -x ".next/*"
 
-      - uses: einaregilsson/beanstalk-deploy@v22
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: PWEB
           environment_name: PWEB-env
-          region: ${{ secrets.AWS_REGION }}
+          region: us-east-1
           version_label: ${{ github.sha }}
           deployment_package: deploy.zip
