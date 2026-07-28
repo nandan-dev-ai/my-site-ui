@@ -16,55 +16,54 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="bg-transparent shadow-none">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center">
-              <div className="flex-shrink-0 flex items-center">
-                <Link href="/" className="text-xl font-bold text-gray-800 dark:text-white">
-                  Nandan Barman
-                </Link>
-              </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <Link href="/" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  Home
-                </Link>
-                <Link href="/about" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  About
-                </Link>
-                <Link href="/experience" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  Experience
-                </Link>
-                <Link href="/skills" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  Skills
-                </Link>
-                <Link href="/blog" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                  Blog
-                </Link>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <form onSubmit={handleSearch} className="flex items-center">
-                <input
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search..."
-                  className="px-3 py-1 text-sm rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-                <button
-                  type="submit"
-                  className="px-3 py-1 text-sm bg-indigo-600 text-white rounded-r-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                  Search
-                </button>
-              </form>
-              <Link href="/admin" className="px-3 py-1.5 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition">
-                Login
+    <nav className="sticky top-0 z-50 border-b border-white/60 bg-white/70 backdrop-blur-xl animate-fade-up">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="text-lg font-semibold tracking-tight text-slate-900 transition hover:text-indigo-600">
+            Nandan Barman
+          </Link>
+          <div className="hidden items-center gap-1 sm:flex">
+            {[
+              { href: '/', label: 'Home' },
+              { href: '/about', label: 'About' },
+              { href: '/experience', label: 'Experience' },
+              { href: '/skills', label: 'Skills' },
+              { href: '/blog', label: 'Blog' },
+              { href: '/messages', label: 'Messages' },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              >
+                {item.label}
               </Link>
-            </div>
+            ))}
           </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <form onSubmit={handleSearch} className="hidden items-center rounded-full border border-slate-200 bg-white/80 px-2 py-1 shadow-sm sm:flex">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search"
+              className="w-28 bg-transparent px-2 py-1 text-sm text-slate-700 outline-none placeholder:text-slate-400"
+            />
+            <button
+              type="submit"
+              className="rounded-full bg-indigo-600 px-3 py-1 text-sm font-medium text-white transition hover:bg-indigo-700"
+            >
+              Go
+            </button>
+          </form>
+          <Link
+            href="/admin"
+            className="rounded-full border border-slate-200 bg-slate-900 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-slate-700"
+          >
+            Login
+          </Link>
         </div>
       </div>
     </nav>
