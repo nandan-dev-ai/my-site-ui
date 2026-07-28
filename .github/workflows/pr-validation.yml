@@ -1,0 +1,46 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check PR Size (Max 200 changed lines)
+        run: |
+          git fetch origin master
+          ADDED=$(git diff --numstat origin/master...HEAD | awk '{add+=$1} END {print add+0}')
+          DELETED=$(git diff --numstat origin/master...HEAD | awk '{del+=$2} END {print del+0}')
+          TOTAL=$((ADDED + DELETED))
+
+          echo "Added: $ADDED"
+          echo "Deleted: $DELETED"
+          echo "Total changed lines: $TOTAL"
+
+          if [ "$TOTAL" -gt 200 ]; then
+            echo "❌ PR exceeds 200 changed lines."
+            exit 1
+          fi
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Build Application
+        run: npm run build
