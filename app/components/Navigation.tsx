@@ -20,7 +20,7 @@ const Navigation = () => {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6">
           <Link href="/" className="text-lg font-semibold tracking-tight text-slate-900 transition hover:text-indigo-600">
-            Nandan Barman
+            Nandan Barman (Dev)
           </Link>
           <div className="hidden items-center gap-1 sm:flex">
             {[
