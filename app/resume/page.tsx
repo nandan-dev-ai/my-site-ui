@@ -234,6 +234,12 @@ export default function ResumeBuilder() {
                   )}
                 </label>
               ))}
+              <div className="border-t border-slate-200 pt-5">
+                <h3 className="text-sm font-semibold text-slate-900">Skills</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {skills.map((skill) => <span key={skill} className="rounded-md bg-indigo-50 px-2.5 py-1.5 text-xs font-medium text-indigo-700">{skill}</span>)}
+                </div>
+              </div>
               {entrySection('experience', 'Experience', 'Responsibilities and impact')}
               {entrySection('academic', 'Academic history', 'Relevant coursework, focus, or achievements')}
               {entrySection('awards', 'Awards', 'Recognition details')}
@@ -262,6 +268,13 @@ export default function ResumeBuilder() {
                 </div>
 
                 <div>
+                  <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-700">Core skills</h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {skills.map((skill) => <span key={skill} className="rounded-md bg-slate-100 px-2.5 py-1.5 text-xs font-medium text-slate-700">{skill}</span>)}
+                  </div>
+                </div>
+
+                <div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-700">Experience</h3>
                   <div className="mt-3 space-y-5">
                     {resume.experience.map((entry, index) => {
@@ -273,13 +286,6 @@ export default function ResumeBuilder() {
                         </div>
                       );
                     })}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-700">Core skills</h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {skills.map((skill) => <span key={skill} className="rounded-md bg-slate-100 px-2.5 py-1.5 text-xs font-medium text-slate-700">{skill}</span>)}
                   </div>
                 </div>
 

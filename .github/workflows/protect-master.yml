@@ -1,0 +1,45 @@
+name: Protect master branch
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  reject-direct-commits:
+    name: Reject direct commits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pushed history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Require pull request merge commits
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          if [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            COMMITS=$(git rev-list --parents "$AFTER_SHA")
+          else
+            COMMITS=$(git rev-list --parents "$BEFORE_SHA..$AFTER_SHA")
+          fi
+
+          while read -r commit_line; do
+            set -- $commit_line
+            if [ "$#" -lt 3 ]; then
+              echo "Direct commit detected on master: $1"
+              echo "Changes to master must be merged through a pull request."
+              exit 1
+            fi
+          done <<< "$COMMITS"
+
+          echo "All commits in this push are pull request merge commits."
