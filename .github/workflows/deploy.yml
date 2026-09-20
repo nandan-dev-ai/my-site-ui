@@ -12,9 +12,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
       - name: Install Dependencies
-        uses: npm install
+        run: npm install
       - name: Generate Package
-        uses: zip -r nodejs-app-build.zip .
+        run: zip -r nodejs-app-build.zip .
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
