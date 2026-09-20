@@ -12,11 +12,16 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
       - name: Install Dependencies
-        run: npm install
+        run: npm install --include=dev
       - name: Build Next.js application
         run: npm run build
       - name: Generate Package
-        run: zip -r nodejs-app-build.zip .
+        run: |
+          zip -r nodejs-app-build.zip . \
+            -x "*.git*" \
+            -x ".github/*" \
+            -x ".env" \
+            -x ".env.*"
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
