@@ -17,6 +17,9 @@ jobs:
         run: npm run build
       - name: Generate Package
         run: |
+          cp -r public .next/standalone/public
+          mkdir -p .next/standalone/.next
+          cp -r .next/static .next/standalone/.next/static
           zip -r nodejs-app-build.zip . \
             -x "*.git*" \
             -x ".github/*" \
