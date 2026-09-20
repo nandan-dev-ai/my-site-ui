@@ -15,16 +15,44 @@ jobs:
         run: npm install
       - name: Generate Package
         run: zip -r nodejs-app-build.zip .
-     
+      - name: Verify Elastic Beanstalk target
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+          EB_APPLICATION_NAME: Resume
+          EB_ENVIRONMENT_NAME: Resume-env
+        run: |
+          APPLICATION=$(aws elasticbeanstalk describe-applications \
+            --application-names "$EB_APPLICATION_NAME" \
+            --query 'Applications[0].ApplicationName' \
+            --output text)
+          if [ "$APPLICATION" != "$EB_APPLICATION_NAME" ]; then
+            echo "Elastic Beanstalk application '$EB_APPLICATION_NAME' was not found in AWS account/region us-east-1."
+            echo "Available applications:"
+            aws elasticbeanstalk describe-applications --query 'Applications[].ApplicationName' --output text
+            exit 1
+          fi
+
+          ENVIRONMENT=$(aws elasticbeanstalk describe-environments \
+            --application-name "$EB_APPLICATION_NAME" \
+            --environment-names "$EB_ENVIRONMENT_NAME" \
+            --query 'Environments[0].EnvironmentName' \
+            --output text)
+          test "$ENVIRONMENT" = "$EB_ENVIRONMENT_NAME" || {
+            echo "Elastic Beanstalk environment '$EB_ENVIRONMENT_NAME' was not found for '$EB_APPLICATION_NAME'."
+            exit 1
+          }
+
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
-          aws_access_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_secret_key: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws_access_key: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           application_name: 'Resume'
           environment_name: 'Resume-env'
           version_label: ${{github.sha}}
-          region: us-west-2
+          region: us-east-1
           deployment_package: 'nodejs-app-build.zip'
         
       
