@@ -13,6 +13,8 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install Dependencies
         run: npm install
+      - name: Build Next.js application
+        run: npm run build
       - name: Generate Package
         run: zip -r nodejs-app-build.zip .
       - name: Deploy to EB
