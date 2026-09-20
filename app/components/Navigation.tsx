@@ -16,7 +16,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/60 bg-white/70 backdrop-blur-xl animate-fade-up">
+    <nav className="sticky top-0 z-50 border-b border-white/60 bg-white/70 backdrop-blur-xl animate-fade-up print:hidden">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6">
           <Link href="/" className="text-lg font-semibold tracking-tight text-slate-900 transition hover:text-indigo-600">
@@ -28,6 +28,7 @@ const Navigation = () => {
               { href: '/about', label: 'About' },
               { href: '/experience', label: 'Experience' },
               { href: '/skills', label: 'Skills' },
+              { href: '/resume', label: 'Resume' },
               { href: '/blog', label: 'Blog' },
               { href: '/messages', label: 'Messages' },
             ].map((item) => (
