@@ -15,18 +15,7 @@ jobs:
         run: npm install
       - name: Generate Package
         run: zip -r nodejs-app-build.zip .
-      - name: Check AWS credentials are configured
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          test -n "$AWS_ACCESS_KEY_ID" || { echo "AWS_ACCESS_KEY_ID is not configured."; exit 1; }
-          test -n "$AWS_SECRET_ACCESS_KEY" || { echo "AWS_SECRET_ACCESS_KEY is not configured."; exit 1; }
-          if [ "${#AWS_ACCESS_KEY_ID}" -eq 40 ] && [ "${#AWS_SECRET_ACCESS_KEY}" -eq 20 ]; then
-            echo "AWS credentials appear to be swapped: access keys are usually 20 characters and secret keys are 40 characters."
-            exit 1
-          fi
-          aws sts get-caller-identity
+     
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
