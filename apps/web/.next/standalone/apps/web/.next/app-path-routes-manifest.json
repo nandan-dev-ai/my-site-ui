@@ -1,0 +1,16 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/about/page": "/about",
+  "/admin/dashboard/page": "/admin/dashboard",
+  "/admin/page": "/admin",
+  "/blog/page": "/blog",
+  "/experience/page": "/experience",
+  "/favicon.ico/route": "/favicon.ico",
+  "/health/route": "/health",
+  "/messages/page": "/messages",
+  "/page": "/",
+  "/resume/page": "/resume",
+  "/search/page": "/search",
+  "/skills/page": "/skills"
+}

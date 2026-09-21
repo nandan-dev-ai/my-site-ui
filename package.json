@@ -1,12 +1,17 @@
 {
-  "name": "personal-website",
+  "name": "my-site-ui",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.33.2",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "dev": "node scripts/run-app.mjs web dev",
+    "build": "node scripts/run-app.mjs web build",
+    "start": "node scripts/start-app.mjs",
+    "lint": "pnpm exec eslint apps/web",
+    "dev:finance": "node scripts/run-app.mjs finance-nx-ui dev",
+    "build:finance": "node scripts/run-app.mjs finance-nx-ui build",
+    "start:finance": "node scripts/start-app.mjs finance-nx-ui",
+    "lint:finance": "pnpm exec eslint apps/finance-nx-ui"
   },
   "dependencies": {
     "axios": "^1.14.0",

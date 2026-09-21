@@ -9,18 +9,26 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
       - name: Setup Node
         uses: actions/setup-node@v4
+        with:
+          node-version: 24
       - name: Install Dependencies
-        run: npm install --include=dev
+        run: pnpm install --frozen-lockfile
       - name: Build Next.js application
-        run: npm run build
+        run: pnpm build
       - name: Generate Package
         run: |
-          cp -r public .next/standalone/public
-          mkdir -p .next/standalone/.next
-          cp -r .next/static .next/standalone/.next/static
-          zip -r nodejs-app-build.zip . \
+          mkdir -p apps/web/.next/standalone/apps/web/.next
+          cp -r apps/web/public apps/web/.next/standalone/apps/web/public
+          cp -r apps/web/.next/static apps/web/.next/standalone/apps/web/.next/static
+          cp apps/web/Procfile apps/web/.next/standalone/Procfile
+          cd apps/web/.next/standalone
+          zip -r ../../../nodejs-app-build.zip . \
             -x "*.git*" \
             -x ".github/*" \
             -x ".env" \
@@ -34,7 +42,7 @@ jobs:
           environment_name: 'Resume-env'
           version_label: ${{github.sha}}
           region: us-east-1
-          deployment_package: 'nodejs-app-build.zip'
+          deployment_package: 'apps/web/nodejs-app-build.zip'
         
       
     

@@ -1,0 +1,11 @@
+:HL["/_next/static/chunks/0hkh280kxoq2u.css","style"]
+:HL["/_next/static/media/797e433ab948586e-s.p.08e28id.o-okb.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/caa3a2e1cccd8315-s.p.09~u27dqhyhd6.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/images/infosys.png","image"]
+:HL["/images/hcl.png","image"]
+:HL["/images/tcs.png","image"]
+:HL["/images/att.png","image"]
+:HL["/images/abbott.png","image"]
+:HL["/images/walmart.png","image"]
+:HL["/images/tomra.png","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"experience","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"aL8Br2xWie4tA9PpF5XFm"}
